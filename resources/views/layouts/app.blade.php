@@ -49,16 +49,16 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="index.html"><img src="{{asset('assets/images/logo1.png')}}" width="35" alt="Lunodar"><span class="m-l-10">Lunodar</span></a>
+        <a href="/"><img src="{{asset('assets/images/logo1.png')}}" width="35" alt="Lunodar"><span class="m-l-10">Lunodar</span></a>
     </div>
     <div class="menu">
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="profile.html"><img src="{{asset('assets/images/profile_av.jpg')}}" alt="User"></a>
+                    <a class="image" href="/"><img src="{{asset('assets/images/moon.png')}}" alt="User"></a>
                     <div class="detail">
-                        <h4>Дмитрий</h4>
-                        <small>Super Admin</small>
+                        <h4>Админикус</h4>
+                        <small>Admin</small>
                     </div>
                 </div>
             </li>
@@ -67,16 +67,17 @@
             <li><a href="/lunar-zodiac/list"><i style="font-size: 20px !important;" class="zmdi zmdi-star"></i><span>Знаки зодиака</span></a></li>
             <li><a href="/lunar-activity-field/list"><i class="zmdi zmdi-thumb-up-down"></i><span>Сферы деятельности</span></a></li>
             <li><a href="/lunar-day-interpretation/list" class="menu-toggle"><i class="zmdi zmdi-receipt"></i><span>Интерпретации</span></a>
-            <li><a href="/author/list" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Астрологи</span></a>
-                <ul class="ml-menu">
-                    <li><a href="mail-inbox.html">Список лунных дней</a></li>
-{{--                    <li><a href="chat.html">Chat Apps</a></li>--}}
-{{--                    <li><a href="events.html">Calendar</a></li>--}}
-{{--                    <li><a href="contact.html">Contact</a></li>--}}
-                </ul>
+            <li><a href="/author/list" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Астрологи</span></a></li>
+{{--            <li><a href="{{ route('logout') }}" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Выход</span></a></li>--}}
+            <li>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    <i class="zmdi zmdi-sign-in"></i><span>Выход</span>
+                </a>
             </li>
-
         </ul>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
     </div>
 </aside>
 
