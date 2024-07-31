@@ -36,8 +36,8 @@
                                         <tr>
                                             <td>{{$lunar_day['id']}}</td>
                                             <td>{!! $lunar_day['short_description'] !!}</td>
-                                            <td>{{$lunar_day['symbol']}}</td>
-                                            <td>{{$lunar_day['stone']}}</td>
+                                            <td>{{Str::limit($lunar_day['symbol'], 21)}}</td>
+                                            <td>{{Str::limit($lunar_day['stone'], 21)}}</td>
                                             <td>{{$lunar_day['updated_at']}}</td>
                                             <td>
                                                 <a href="/lunar-day/edit/{{$lunar_day['id']}}" class="js_click_update_day btn btn-default waves-effect waves-float btn-sm waves-green"><i class="zmdi zmdi-edit"></i></a>

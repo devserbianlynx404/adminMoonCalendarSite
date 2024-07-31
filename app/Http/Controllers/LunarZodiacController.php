@@ -85,15 +85,19 @@ class LunarZodiacController extends Controller
                 'description.required' => 'Поле "Описание Фазы" обязательно для заполнения',
                 'title.required' => 'Поле "Заголовок" обязательно для заполнения',
             ]);
-        $cleaned_name = strip_tags($request->name, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
-        $cleaned_number_title = strip_tags($request->title, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
-        $cleaned_description = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_name = strip_tags($request->name, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_number_title = strip_tags($request->title, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_description = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+
+        $pattern = '/<p(.*?)>/i';
+        $replacement = '<p class="article__text"$1>';
+        $newHtmlContent = preg_replace($pattern, $replacement, $request->description);
 
         $lunar_zodiac = Zodiac::find($id);
 
-        $lunar_zodiac->name = $cleaned_name;
-        $lunar_zodiac->title = $cleaned_number_title;
-        $lunar_zodiac->description = $cleaned_description;
+        $lunar_zodiac->name = $request->name;
+        $lunar_zodiac->title = $request->title;
+        $lunar_zodiac->description = $newHtmlContent;
         $lunar_zodiac->save();
 
         return redirect('/lunar-zodiac/list');

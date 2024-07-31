@@ -85,15 +85,19 @@ class LunarDayInterpretationController extends Controller
                 'description.required' => 'Поле "Интерпретация" обязательно для заполнения',
                 'author_id.required' => 'Поле "Автор" обязательно для заполнения',
             ]);
-        $cleaned_lunar_day_id = strip_tags($request->lunar_day_id, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
-        $cleaned_author_id = strip_tags($request->author_id, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
-        $cleaned_description = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_lunar_day_id = strip_tags($request->lunar_day_id, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_author_id = strip_tags($request->author_id, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_description = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+
+        $pattern = '/<p(.*?)>/i';
+        $replacement = '<p class="article__text"$1>';
+        $newHtmlContent = preg_replace($pattern, $replacement, $request->description);
 
         $lunar_zodiac = LunarDayInterpretation::find($id);
 
-        $lunar_zodiac->lunar_day_id = $cleaned_lunar_day_id;
-        $lunar_zodiac->author_id = $cleaned_author_id;
-        $lunar_zodiac->description = $cleaned_description;
+        $lunar_zodiac->lunar_day_id = $request->lunar_day_id;
+        $lunar_zodiac->author_id = $request->author_id;
+        $lunar_zodiac->description = $newHtmlContent;
         $lunar_zodiac->save();
 
         return redirect('/lunar-day-interpretation/list');

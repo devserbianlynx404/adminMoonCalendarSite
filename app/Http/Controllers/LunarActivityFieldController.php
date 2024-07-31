@@ -89,12 +89,16 @@ class LunarActivityFieldController extends Controller
             'influence.integer' => 'Поле "Действие Луны" должно состоять из цифр',
         ]);
 
-        $cleaned_desc = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_desc = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+
+        $pattern = '/<p(.*?)>/i';
+        $replacement = '<p class="article__text"$1>';
+        $newHtmlContent = preg_replace($pattern, $replacement, $request->description);
 
         $lunar_activity_field = LunarDayActivityField::find($id);
 
         $lunar_activity_field->field_of_activity_id = $request->lunar_activity_field_id;
-        $lunar_activity_field->description = $cleaned_desc;
+        $lunar_activity_field->description = $newHtmlContent;
         $lunar_activity_field->influence = $request->influence;
         $lunar_activity_field->save();
 

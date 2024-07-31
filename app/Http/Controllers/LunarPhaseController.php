@@ -88,15 +88,20 @@ class LunarPhaseController extends Controller
                 'description.required' => 'Поле "Описание Фазы" обязательно для заполнения',
                 'phase_number.required' => 'Поле "Номер фазы" обязательно для заполнения',
             ]);
-        $cleaned_name_phase = strip_tags($request->name_phase, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
-        $cleaned_number_phase = strip_tags($request->number_phase, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
-        $cleaned_description = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_name_phase = strip_tags($request->name_phase, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_number_phase = strip_tags($request->number_phase, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+//        $cleaned_description = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
 //        dd($request);
+
+        $pattern = '/<p(.*?)>/i';
+        $replacement = '<p class="article__text"$1>';
+        $newHtmlContent = preg_replace($pattern, $replacement, $request->description);
+
         $lunar_phase = MoonPhase::find($id);
 
-        $lunar_phase->name = $cleaned_name_phase;
-        $lunar_phase->phase_number = $cleaned_number_phase;
-        $lunar_phase->description = $cleaned_description;
+        $lunar_phase->name = $request->name_phase;
+        $lunar_phase->phase_number = $request->number_phase;
+        $lunar_phase->description = $newHtmlContent;
         $lunar_phase->save();
 
         return redirect('/lunar-phase/list');
