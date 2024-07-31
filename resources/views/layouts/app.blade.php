@@ -49,13 +49,13 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="/"><img src="{{asset('assets/images/logo1.png')}}" width="35" alt="Lunodar"><span class="m-l-10">Lunodar</span></a>
+        <a href="/lunar-day/list"><img src="{{asset('assets/images/logo1.png')}}" width="35" alt="Lunodar"><span class="m-l-10">Lunodar</span></a>
     </div>
     <div class="menu">
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="/"><img src="{{asset('assets/images/moon.png')}}" alt="User"></a>
+                    <a class="image" href="/lunar-day/list"><img src="{{asset('assets/images/moon.png')}}" alt="User"></a>
                     <div class="detail">
                         <h4>Админикус</h4>
                         <small>Admin</small>
