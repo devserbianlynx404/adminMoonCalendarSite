@@ -77,12 +77,26 @@ class LunarPhaseController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'phase_number' => 'required',
+        ],
+            [
+                'name.required' => 'Поле "Название фазы" обязательно для заполнения',
+                'description.required' => 'Поле "Описание Фазы" обязательно для заполнения',
+                'phase_number.required' => 'Поле "Номер фазы" обязательно для заполнения',
+            ]);
+        $cleaned_name_phase = strip_tags($request->name_phase, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+        $cleaned_number_phase = strip_tags($request->number_phase, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+        $cleaned_description = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
 //        dd($request);
         $lunar_phase = MoonPhase::find($id);
 
-        $lunar_phase->name = $request->name_phase;
-        $lunar_phase->phase_number = $request->number_phase;
-        $lunar_phase->description = $request->description;
+        $lunar_phase->name = $cleaned_name_phase;
+        $lunar_phase->phase_number = $cleaned_number_phase;
+        $lunar_phase->description = $cleaned_description;
         $lunar_phase->save();
 
         return redirect('/lunar-phase/list');

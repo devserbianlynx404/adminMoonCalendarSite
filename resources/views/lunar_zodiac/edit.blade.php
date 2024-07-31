@@ -28,12 +28,18 @@
                                 <div class="form-group">
                                         <input name="name" type="text" class="form-control" placeholder="Введите название зодиака" value="{{$lunar_zodiac_data->name}}" />
                                 </div>
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="">
                                     <label>Заголовок:</label>
                                 </div>
                                 <div class="form-group">
                                     <input name="title" type="text" class="form-control" placeholder="Введите заголовок" value="{{$lunar_zodiac_data->title}}" />
                                 </div>
+                                @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <textarea name="description" id="content" style="display:none;"></textarea>
     {{--                            <select class="form-control show-tick">--}}
     {{--                                <option>Select Category --</option>--}}
@@ -53,6 +59,9 @@
                                 <div class="summernote">
                                     {!! $lunar_zodiac_data->description !!}
                                 </div>
+                                @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <button type="submit" class="btn btn-info waves-effect m-t-20">Сохранить</button>
                             </div>
                         </div>

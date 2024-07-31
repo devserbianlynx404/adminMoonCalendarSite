@@ -28,12 +28,18 @@
                                 <div class="form-group">
                                         <input name="name_phase" type="text" class="form-control" placeholder="Введите название фазы" value="{{$lunar_phase_data->name}}" />
                                 </div>
+                                @error('name_phase')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="">
                                     <label>Номер фазы:</label>
                                 </div>
                                 <div class="form-group">
                                     <input name="number_phase" type="text" class="form-control" placeholder="Введите номер" value="{{$lunar_phase_data->phase_number}}" />
                                 </div>
+                                @error('number_phase')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <textarea name="description" id="content" style="display:none;"></textarea>
     {{--                            <select class="form-control show-tick">--}}
     {{--                                <option>Select Category --</option>--}}
@@ -53,6 +59,9 @@
                                 <div class="summernote">
                                     {!! $lunar_phase_data->description !!}
                                 </div>
+                                @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <button type="submit" class="btn btn-info waves-effect m-t-20">Сохранить</button>
                             </div>
                         </div>

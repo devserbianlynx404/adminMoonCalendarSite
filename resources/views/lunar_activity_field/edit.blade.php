@@ -29,6 +29,9 @@
                                         <input readonly name="lunar_activity_field_id" type="hidden" class="form-control" value="{{$lunar_activity_field->id}}" />
                                         <input readonly name="name" type="text" class="form-control" placeholder="Введите название сферы" value="{{\App\Models\LunarDayActivityField::getActivityNameById($lunar_activity_field->id)}}" />
                                 </div>
+                                @error('lunar_activity_field_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="">
                                     <label>Действие Луны:</label>
                                 </div>
@@ -44,6 +47,9 @@
                                     <option @if($lunar_activity_field->influence == 4) selected @endif value="4">Хорошо</option>
                                     <option @if($lunar_activity_field->influence == 5) selected @endif value="5">Отлично</option>
                                 </select>
+                                @error('influence')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="card">
@@ -54,6 +60,9 @@
                                 <div class="summernote">
                                     {!! $lunar_activity_field->description !!}
                                 </div>
+                                @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <button type="submit" class="btn btn-info waves-effect m-t-20">Сохранить</button>
                             </div>
                         </div>

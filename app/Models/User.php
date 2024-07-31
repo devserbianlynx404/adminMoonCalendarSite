@@ -42,4 +42,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function removeDangerousTags($content) {
+        // Удаление тегов <script>, <style>, <iframe> и <object>
+        $dangerousTags = ['script', 'style', 'iframe', 'object'];
+
+        foreach ($dangerousTags as $tag) {
+            $pattern = "/<\s*\/?\s*{$tag}\s*.*?>/i";
+            $content = preg_replace($pattern, '', $content);
+        }
+
+        return $content;
+    }
 }

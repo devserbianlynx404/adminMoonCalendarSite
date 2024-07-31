@@ -75,12 +75,25 @@ class LunarDayController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'stone' => 'required',
+            'description' => 'required',
+            'symbol' => 'required',
+        ],
+            [
+                'stone.required' => 'Поле "Камни дня" обязательно для заполнения',
+                'description.required' => 'Описание дня"Описание зодиака" обязательно для заполнения',
+                'symbol.required' => 'Поле "Символы дня" обязательно для заполнения',
+            ]);
+        $cleaned_desc = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+        $cleaned_stone = strip_tags($request->stone, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+        $cleaned_symbol = strip_tags($request->symbol, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
 //        dd($request);
         $lunar_day = LunarDay::find($id);
 
-        $lunar_day->stone = $request->stone;
-        $lunar_day->symbol = $request->symbol;
-        $lunar_day->description = $request->description;
+        $lunar_day->stone = $cleaned_stone;
+        $lunar_day->symbol = $cleaned_symbol;
+        $lunar_day->description = $cleaned_desc;
         $lunar_day->save();
 
         return redirect('/lunar-day/list');

@@ -76,10 +76,25 @@ class LunarActivityFieldController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'lunar_activity_field_id' => 'required|integer',
+            'description' => 'required',
+            'influence' => 'required|integer',
+        ],
+        [
+            'lunar_activity_field_id.required' => 'Поле "Имя" обязательно для заполнения',
+            'lunar_activity_field_id.integer' => 'Поле "Имя" должно состоять из цифр',
+            'description.required' => 'Поле "Описание зодиака" обязательно для заполнения',
+            'influence.required' => 'Поле "Действие Луны" обязательно для заполнения',
+            'influence.integer' => 'Поле "Действие Луны" должно состоять из цифр',
+        ]);
+
+        $cleaned_desc = strip_tags($request->description, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+
         $lunar_activity_field = LunarDayActivityField::find($id);
 
         $lunar_activity_field->field_of_activity_id = $request->lunar_activity_field_id;
-        $lunar_activity_field->description = $request->description;
+        $lunar_activity_field->description = $cleaned_desc;
         $lunar_activity_field->influence = $request->influence;
         $lunar_activity_field->save();
 

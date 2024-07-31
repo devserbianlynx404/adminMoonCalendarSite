@@ -29,6 +29,9 @@
                                         <input readonly name="author_id" type="hidden" class="form-control" value="{{$lunar_day_interpretation['author_id']}}" />
                                         <input readonly name="name" type="text" class="form-control" placeholder="Введите название сферы" value="{{\App\Models\Author::getAuthorNameById($lunar_day_interpretation['author_id'])}}" />
                                 </div>
+                                @error('author_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="">
                                     <label>Лунный день:</label>
                                 </div>
@@ -36,6 +39,9 @@
                                     <input readonly name="lunar_day_id" type="hidden" class="form-control" value="{{$lunar_day_interpretation->lunar_day_id}}" />
                                     <input readonly name="title" type="text" class="form-control" placeholder="Лунный день" value="{{\App\Models\LunarDay::getLunarDayNameById($lunar_day_interpretation->lunar_day_id)}}" />
                                 </div>
+                                @error('lunar_day_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <textarea name="description" id="content" style="display:none;"></textarea>
 {{--                                <select name="influence" class="form-control show-tick">--}}
 {{--                                    <option>Выберите влияние луны --</option>--}}
@@ -55,6 +61,9 @@
                                 <div class="summernote">
                                     {!! $lunar_day_interpretation->description !!}
                                 </div>
+                                @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <button type="submit" class="btn btn-info waves-effect m-t-20">Сохранить</button>
                             </div>
                         </div>

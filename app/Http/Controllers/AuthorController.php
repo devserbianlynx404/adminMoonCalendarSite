@@ -73,9 +73,20 @@ class AuthorController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required|alpha',
+        ],
+        [
+            'name.required' => 'Поле "Имя" обязательно для заполнения',
+            'name.alpha' => 'Поле "Имя" должно состоять из букв',
+        ]);
+
+        $cleanedName = strip_tags($request->name, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
+
+
         $lunar_zodiac = Author::find($id);
 
-        $lunar_zodiac->name = $request->name;
+        $lunar_zodiac->name = $cleanedName;
         $lunar_zodiac->save();
 
         return redirect('/author/list');

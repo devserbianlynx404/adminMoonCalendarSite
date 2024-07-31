@@ -25,6 +25,9 @@
                                 <div class="">
                                     <label>Имя:</label>
                                 </div>
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="form-group">
                                     <input name="name" type="text" class="form-control" placeholder="Введите название сферы" value="{{$author->name}}" />
                                 </div>
