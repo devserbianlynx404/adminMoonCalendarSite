@@ -79,14 +79,14 @@ class LunarPhaseController extends Controller
     {
 
         $request->validate([
-            'name' => 'required',
+            'name_phase' => 'required',
             'description' => 'required',
-            'phase_number' => 'required',
+            'number_phase' => 'required',
         ],
             [
-                'name.required' => 'Поле "Название фазы" обязательно для заполнения',
+                'name_phase.required' => 'Поле "Название фазы" обязательно для заполнения',
                 'description.required' => 'Поле "Описание Фазы" обязательно для заполнения',
-                'phase_number.required' => 'Поле "Номер фазы" обязательно для заполнения',
+                'number_phase.required' => 'Поле "Номер фазы" обязательно для заполнения',
             ]);
 //        $cleaned_name_phase = strip_tags($request->name_phase, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
 //        $cleaned_number_phase = strip_tags($request->number_phase, '<b><i><u><strong><em><p><br><ul><ol><li><table><thead><tbody><tfoot><tr><td><th>');
