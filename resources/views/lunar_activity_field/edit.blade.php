@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="form-group">
                                         <input readonly name="lunar_activity_field_id" type="hidden" class="form-control" value="{{$lunar_activity_field->field_of_activity_id}}" />
-                                        <input readonly name="name" type="text" class="form-control" placeholder="Введите название сферы" value="{{\App\Models\LunarDayActivityField::getActivityNameById($lunar_activity_field->id)}}" />
+                                        <input readonly name="name" type="text" class="form-control" placeholder="Введите название сферы" value="{{\App\Models\LunarDayActivityField::getActivityNameById($lunar_activity_field->field_of_activity_id)}}" />
                                 </div>
                                 @error('lunar_activity_field_id')
                                 <div class="alert alert-danger">{{ $message }}</div>
